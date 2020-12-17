@@ -135,9 +135,9 @@ qm create $VMID -agent 1 -bios ovmf -name $VM_NAME -net0 virtio,bridge=vmbr0 \
   -onboot 1 -ostype l26 -scsihw virtio-scsi-pci
 pvesm alloc $STORAGE $VMID $DISK0 128 1>&/dev/null
 qm importdisk $VMID ${FILE%".gz"} $STORAGE ${IMPORT_OPT:-} 1>&/dev/null
-qm set $VMID \
-  -efidisk0 ${DISK0_REF},size=128K \
-  -sata0 ${DISK1_REF},size=6G > /dev/null
+qm set $VMID -bootdisk sata0 -efidisk0 ${DISK0_REF},size=128K \
+
+  -sata0 ${DISK1_REF},size=12G > /dev/null
 
 
 # Add serial port and enable console output
